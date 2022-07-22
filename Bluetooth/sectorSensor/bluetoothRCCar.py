@@ -1,6 +1,11 @@
 # https://create.arduino.cc/projecthub/ansh2919/serial-communication-between-python-and-arduino-e7cce0
 # For the connection between python and arduino
 import bluetooth
+import serial
+import time
+
+#Jesse's port '/devices/cu.usbmodem14201'
+arduino = serial.Serial(port='COM3', baudrate=115200)
 
 def scan():
 
@@ -24,4 +29,13 @@ def scan():
         print("Found RC Car")
         print(info_tuples[car_info_index])
 
-scan()
+#scan()
+
+def write_read():
+    data = arduino.readline()
+    return data
+
+while True:
+    value = write_read()
+    print(value)
+

@@ -52,7 +52,7 @@ void scanSensor1() {
       lapStart = millis();
       sectorStart = lapStart;
       prevSensor = 1;
-      Serial.print("Lap Start: ");
+      //Serial.print("Lap Start: ");
       Serial.println(lapStart);
     } else if (prevSensor == 4) {
       // next lap
@@ -63,14 +63,14 @@ void scanSensor1() {
       sectorStart = sectorEnd;
       lapStart = lapEnd;
       prevSensor = 1;
-      Serial.print("Sector 4: ");
+      //Serial.print("Sector 4: ");
       Serial.println(sectorTime);
-      Serial.print("Lap End: ");
+      //Serial.print("Lap End: ");
       Serial.println(lapEnd);
-      Serial.print("Lap Time: ");
+      //Serial.print("Lap Time: ");
       Serial.println(lapTime);
       Serial.println();
-      Serial.print("Lap Start: ");
+      //Serial.print("Lap Start: ");
       Serial.println(lapStart);
     }
     
@@ -84,7 +84,7 @@ void scanSensor2() {
     sectorTime = sectorEnd - sectorStart;
     sectorStart = sectorEnd;
     prevSensor = 2;
-    Serial.print("Sector 1: ");
+    //Serial.print("Sector 1: ");
     Serial.println(sectorTime);
   }
 }
@@ -96,7 +96,7 @@ void scanSensor3() {
     sectorTime = sectorEnd - sectorStart;
     sectorStart = sectorEnd;
     prevSensor = 3;
-    Serial.print("Sector 2: ");
+    //Serial.print("Sector 2: ");
     Serial.println(sectorTime);
   }
 }
@@ -108,7 +108,7 @@ void scanSensor4() {
     sectorTime = sectorEnd - sectorStart;
     sectorStart = sectorEnd;
     prevSensor = 4;
-    Serial.print("Sector 3: ");
+    //Serial.print("Sector 3: ");
     Serial.println(sectorTime);
   }
 }
