@@ -1,6 +1,10 @@
 #include <PWMServo.h>
-#include <SoftwareSerial.h>
-SoftwareSerial BLTSerial(11, 4);  //RX,TX
+#include<SoftwareSerial.h>
+
+#define TX 4
+#define RX 11
+SoftwareSerial btSerial(RX, TX);
+
 
 #define IN1 7
 #define IN2 8
@@ -65,6 +69,9 @@ void setup() {
   head.attach(SERVO_PIN);
   turn(FRONT);  
   brake();
+  pinMode(RX, INPUT);
+  pinMode(TX, OUTPUT);
+  btSerial.begin(9600);
   Serial.begin(9600);
 }
 
