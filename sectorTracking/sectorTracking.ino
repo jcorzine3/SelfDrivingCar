@@ -1,4 +1,6 @@
 #include <PWMServo.h>
+#include <SoftwareSerial.h>
+SoftwareSerial BLTSerial(11, 4);  //RX,TX
 
 #define IN1 7
 #define IN2 8
