@@ -88,30 +88,30 @@ String readIR() {
 void linetracking() {
   String irString = readIR();
   
-  if (irString == "10000" || irString == "11000") {
-        if (prevTurn != 1) accelerate(250);
+  if (irString == "10000" || irString == "11000") {   
         turn(RIGHT);
+        if (prevTurn != 1) accelerate(250);
         throttle(TURN_SPEED);
         prevTurn = 1;
   }
   
   if (irString == "11100" || irString == "11110") {
-        if (prevTurn != 2) accelerate(250);
         turn(SHARP_RIGHT);
+        if (prevTurn != 2) accelerate(250);
         throttle(TURN_SPEED);
         prevTurn = 2;
   }
 
   if (irString == "00001" || irString == "00011") {
-        if (prevTurn != -1) accelerate(250);
         turn(LEFT);
+        if (prevTurn != -1) accelerate(250);
         throttle(TURN_SPEED);
         prevTurn = -1;
   }
 
   if (irString == "00111" || irString == "01111") {
-        if (prevTurn != -2) accelerate(250);
         turn(SHARP_LEFT);
+        if (prevTurn != -2) accelerate(250);
         throttle(TURN_SPEED);
         prevTurn = -2;
   }

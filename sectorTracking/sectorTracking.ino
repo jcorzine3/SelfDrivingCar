@@ -26,10 +26,11 @@ int SLIGHT_LEFT = FRONT - 10;
 #define LFSensor_4 A4
 char sensor[5];
 int prevTurn = 0; // 0 denotes straight, 1 denotes right, -1 denotes left
+int sector = 1;
 
-#define SPEED 125
-#define TURN_SPEED 200
-#define REVERSE_SPEED 250
+int carSpeed = 150
+int turnSpeed = 200
+int reverseSpeed = 250
 #define MAX_SPEED 250
 
 #define SERVO_PIN 9
@@ -76,8 +77,17 @@ void setup() {
 }
 
 void loop() {
+  sectortracking();
   linetracking();
   
+}
+
+void sectortracking() {
+  if (sector == 1 || sector == 3) {
+    
+  } else if (sector == 2 || sector == 4) {
+    
+  }
 }
 
 String readIR() {
