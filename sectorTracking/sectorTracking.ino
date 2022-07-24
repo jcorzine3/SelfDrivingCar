@@ -11,12 +11,16 @@ SoftwareSerial btSerial(RX, TX);
 #define ENA 5
 
 #define FRONT 80        // steering to front 
-int SHARP_RIGHT=FRONT+30;
-int SHARP_LEFT=FRONT-30;
-int RIGHT=FRONT+20;
-int LEFT=FRONT-20;
+int SHARP_RIGHT= FRONT+30;
+int SHARP_LEFT = FRONT-30;
+int RIGHT= FRONT + 20;
+int LEFT= FRONT - 20;
 int SLIGHT_RIGHT = FRONT + 10;
 int SLIGHT_LEFT = FRONT - 10;
+int slightRight = SLIGHT_RIGHT;
+int slightLeft = SLIGHT_LEFT;
+int left = LEFT;
+int right = RIGHT;
 
 // IR Sensors
 #define LFSensor_0 A0 
@@ -27,6 +31,8 @@ int SLIGHT_LEFT = FRONT - 10;
 char sensor[5];
 int prevTurn = 0; // 0 denotes straight, 1 denotes right, -1 denotes left
 int sector = 1;
+int prevSector = 0;
+int lapTime = 0;
 
 int carSpeed = 150
 int turnSpeed = 200
@@ -83,10 +89,28 @@ void loop() {
 }
 
 void sectortracking() {
-  if (sector == 1 || sector == 3) {
-    
-  } else if (sector == 2 || sector == 4) {
-    
+  if ((sector == 1 || sector == 3) && (prevSector != 1 && prevSector != 3)) {
+    // set preconditions for straight
+    carSpeed = 150;
+    turn(FRONT);
+    // set adjustment settings for straight
+    int slightRight = SLIGHT_RIGHT;
+    int slightLeft = SLIGHT_LEFT;
+    int left = LEFT;
+    int right = RIGHT;
+    // set previous sector
+    prevSector = sector
+  } else if ((sector == 2 || sector == 4) && (prevSector != 2 && prevSector != 4)) {
+    // set preconditions for turn
+    carSpeed = 100;
+    turn(RIGHT);
+    // set adjustment setting for turn
+    int slightRight = RIGHT;
+    int slightLeft = SLIGHT_LEFT;
+    int left = LEFT;
+    int right = SHARP_RIGHT;
+    // set previous sector
+    prevSector = sector;
   }
 }
 
@@ -108,36 +132,36 @@ void linetracking() {
   String irString = readIR();
   
   if (irString == "10000" || irString == "11000") {
+        turn(slightRight);
         if (prevTurn != 1) accelerate(250);
-        turn(RIGHT);
-        throttle(TURN_SPEED);
+        throttle(turnSpeed);
         prevTurn = 1;
   }
   
   if (irString == "11100" || irString == "11110") {
+        turn(right);
         if (prevTurn != 2) accelerate(250);
-        turn(SHARP_RIGHT);
-        throttle(TURN_SPEED);
+        throttle(turnSpeed);
         prevTurn = 2;
   }
 
   if (irString == "00001" || irString == "00011") {
+        turn(slightLeft);
         if (prevTurn != -1) accelerate(250);
-        turn(LEFT);
-        throttle(TURN_SPEED);
+        throttle(turnSpeed);
         prevTurn = -1;
   }
 
   if (irString == "00111" || irString == "01111") {
+        turn(left);
         if (prevTurn != -2) accelerate(250);
-        turn(SHARP_LEFT);
-        throttle(TURN_SPEED);
+        throttle(turnSpeed);
         prevTurn = -2;
   }
 
   if (irString == "00000") {
       turn(FRONT);
-      throttle(SPEED);
+      throttle(carSpeed);
       prevTurn = 0;
   }
 
@@ -146,13 +170,13 @@ void linetracking() {
       if (prevTurn == 1 || prevTurn == 2) {
         turn(SHARP_LEFT);
         while (readIR() == "11111" ) {
-          reverse(REVERSE_SPEED);
+          reverse(reverseSpeed);
         }
         prevTurn == -2;
       } else if (prevTurn == -1 || prevTurn == -2) {
         turn(SHARP_RIGHT);
         while (readIR() == "11111") {
-          reverse(REVERSE_SPEED);
+          reverse(reverseSpeed);
         }
         prevTurn == 2;
       }
