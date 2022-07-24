@@ -34,9 +34,9 @@ int sector = 1;
 int prevSector = 0;
 int lapTime = 0;
 
-int carSpeed = 150
-int turnSpeed = 200
-int reverseSpeed = 250
+int carSpeed = 150;
+int turnSpeed = 200;
+int reverseSpeed = 250;
 #define MAX_SPEED 250
 
 #define SERVO_PIN 9
@@ -83,6 +83,10 @@ void setup() {
 }
 
 void loop() {
+  if (btSerial.available() > 0) {
+    sector = btSerial.readStringUntil('\n').toInt();
+    Serial.println(sector);
+  }
   sectortracking();
   linetracking();
   
@@ -99,7 +103,7 @@ void sectortracking() {
     int left = LEFT;
     int right = RIGHT;
     // set previous sector
-    prevSector = sector
+    prevSector = sector;
   } else if ((sector == 2 || sector == 4) && (prevSector != 2 && prevSector != 4)) {
     // set preconditions for turn
     carSpeed = 100;
@@ -123,8 +127,8 @@ String readIR() {
   sensor[4] = digitalRead(LFSensor_4);
   sensorVal_DEC += sensor[0]*16 + sensor[1]*8 + sensor[2]*4 + sensor[3]*2 + sensor[4];
   String sensorString = String(sensorVal_DEC,BIN).substring(1,6);
-  Serial.println("Sensor String: " + sensorString);
-  Serial.println();
+  //Serial.println("Sensor String: " + sensorString);
+  //Serial.println();
   return sensorString;
 }
 

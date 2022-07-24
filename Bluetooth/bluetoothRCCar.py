@@ -7,7 +7,7 @@ import time
 
 #Jesse's port '/devices/cu.usbmodem14201'
 arduino = serial.Serial(port='COM3', baudrate=115200)
-bluetooth_rc_car = serial.Serial('COM7')
+bluetooth_rc_car = serial.Serial('COM7', baudrate=9600)
 
 def write_read():
     data = arduino.readline()
