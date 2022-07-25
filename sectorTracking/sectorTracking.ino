@@ -95,7 +95,7 @@ void loop() {
 void sectortracking() {
   if ((sector == 1 || sector == 3) && (prevSector != 1 && prevSector != 3)) {
     // set preconditions for straight
-    carSpeed = 125;
+    carSpeed = 150;
     turn(FRONT);
     // set adjustment settings for straight
     int slightRight = SLIGHT_RIGHT;
