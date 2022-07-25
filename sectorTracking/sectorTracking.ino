@@ -88,14 +88,14 @@ void loop() {
     Serial.println(sector);
   }
   sectortracking();
-  linetracking();
+  //linetracking();
   
 }
 
 void sectortracking() {
   if ((sector == 1 || sector == 3) && (prevSector != 1 && prevSector != 3)) {
     // set preconditions for straight
-    carSpeed = 150;
+    carSpeed = 125;
     turn(FRONT);
     // set adjustment settings for straight
     int slightRight = SLIGHT_RIGHT;

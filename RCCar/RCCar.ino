@@ -136,6 +136,8 @@ void linetracking() {
           reverse(REVERSE_SPEED);
         }
         prevTurn == 2;
+      } else {
+        reverse(REVERSE_SPEED);
       }
       
   }
