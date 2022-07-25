@@ -1,4 +1,5 @@
 #include "SevSeg.h"
+SevSeg sevseg;
 
 #define echo_PIN1    2 // Ultrasonic Echo pin
 #define trig_PIN1    3  // Ultrasonic Trig pin
@@ -15,7 +16,7 @@ int minDistance = 15;
 int prevSensor = 0;
 int sectorLocation = 1;
 boolean raceStarted = false;
-double lapStart;
+double lapStart = 0;
 double lapEnd;
 double lapTime;
 double sectorStart;
@@ -28,8 +29,8 @@ void setup() {
   byte digitPins[] = {A8, A9, A10, A11};
   byte segmentPins[] = {A0, A1, A2, A3, A4, A5, A6, A7};
   bool resistorsOnSegments = false; // 'false' means resistors are on digit pins
-  byte hardwareConfig = COMMON_ANODE; // See README.md for options
-  bool updateWithDelays = false; // Default 'false' is Recommended
+  byte hardwareConfig = COMMON_CATHODE; // See README.md for options
+  bool updateWithDelays = true; // Default 'false' is Recommended
   bool leadingZeros = false; // Use 'true' if you'd like to keep the leading zeros
   bool disableDecPoint = false; // Use 'true' if your decimal point doesn't exist or isn't connected. Then, you only need to specify 7 segmentPins[]
   sevseg.begin(hardwareConfig, numDigits, digitPins, segmentPins, resistorsOnSegments,
@@ -52,9 +53,9 @@ int scan(int trig_PIN, int echo_PIN){
   long duration; //microseconds
   int distance;
   digitalWrite(trig_PIN,LOW);
-  delayMicroseconds(2);                                                                              
+  //delayMicroseconds(2);                                                                              
   digitalWrite(trig_PIN,HIGH);
-  delayMicroseconds(10);
+  //delayMicroseconds(10);
   digitalWrite(trig_PIN,LOW);
   duration = pulseIn(echo_PIN,HIGH);
   distance = duration * 0.017; //how far away the object is in cm
@@ -150,12 +151,7 @@ void loop() {
   scanSensor2();
   scanSensor3();
   scanSensor4();
-  if (raceStarted) {
-    sevseg.setNumber(int((millis() - lapStart)/1000), 0));
-    sevseg.refreshDisplay();
-  } else {
-    sevseg.setNumber(0,0);
-    sevseg.refreshDisplay();
-  }
+  sevseg.setNumber((millis() - lapStart)/1000,0);
+  sevseg.refreshDisplay();
   
 }
