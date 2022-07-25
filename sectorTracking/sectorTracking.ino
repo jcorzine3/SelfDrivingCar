@@ -10,13 +10,13 @@ SoftwareSerial btSerial(RX, TX);
 #define IN2 8
 #define ENA 5
 
-#define FRONT 80        // steering to front 
-int SHARP_RIGHT= FRONT+30;
-int SHARP_LEFT = FRONT-30;
-int RIGHT= FRONT + 20;
-int LEFT= FRONT - 20;
-int SLIGHT_RIGHT = FRONT + 10;
-int SLIGHT_LEFT = FRONT - 10;
+#define FRONT 75        // steering to front 
+int SHARP_RIGHT= FRONT+40;
+int SHARP_LEFT = FRONT-40;
+int RIGHT= FRONT + 35;
+int LEFT= FRONT - 35;
+int SLIGHT_RIGHT = FRONT + 20;
+int SLIGHT_LEFT = FRONT - 20;
 int slightRight = SLIGHT_RIGHT;
 int slightLeft = SLIGHT_LEFT;
 int left = LEFT;
@@ -34,7 +34,7 @@ int sector = 1;
 int prevSector = 0;
 int lapTime = 0;
 
-int carSpeed = 150;
+int carSpeed = 125;
 int turnSpeed = 200;
 int reverseSpeed = 250;
 #define MAX_SPEED 250
@@ -107,7 +107,7 @@ void sectortracking() {
   } else if ((sector == 2 || sector == 4) && (prevSector != 2 && prevSector != 4)) {
     // set preconditions for turn
     carSpeed = 100;
-    turn(RIGHT);
+    turn(LEFT);
     // set adjustment setting for turn
     int slightRight = RIGHT;
     int slightLeft = SLIGHT_LEFT;
@@ -172,13 +172,13 @@ void linetracking() {
   if (irString == "11111") {
       brake();
       if (prevTurn == 1 || prevTurn == 2) {
-        turn(SHARP_LEFT);
+        turn(LEFT);
         while (readIR() == "11111" ) {
           reverse(reverseSpeed);
         }
         prevTurn == -2;
       } else if (prevTurn == -1 || prevTurn == -2) {
-        turn(SHARP_RIGHT);
+        turn(RIGHT);
         while (readIR() == "11111") {
           reverse(reverseSpeed);
         }

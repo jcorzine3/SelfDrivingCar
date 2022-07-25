@@ -1,7 +1,7 @@
 #include <Servo.h>
 Servo head;
 #define SERVO_PIN 9
-#define FRONT 80
+#define FRONT 75
 
 int RIGHT=FRONT+45;
 int LEFT=FRONT-45;

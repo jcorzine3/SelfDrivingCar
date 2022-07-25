@@ -3,12 +3,12 @@ SevSeg sevseg;
 
 #define echo_PIN1    2 // Ultrasonic Echo pin
 #define trig_PIN1    3  // Ultrasonic Trig pin
-#define echo_PIN2    4
-#define trig_PIN2    5
+#define echo_PIN2    8
+#define trig_PIN2    9
 #define echo_PIN3    6
 #define trig_PIN3    7
-#define echo_PIN4    8
-#define trig_PIN4    9
+#define echo_PIN4    4
+#define trig_PIN4    5
 
 long duration;
 int distance;
