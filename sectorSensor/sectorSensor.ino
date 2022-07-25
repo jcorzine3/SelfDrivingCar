@@ -64,14 +64,14 @@ int scan(int trig_PIN, int echo_PIN){
 
 void scanSensor1() {
   int dist = scan(trig_PIN1, echo_PIN1);
-  if (dist < 15) {
+  if (dist < 40) {
     if (prevSensor == 0) {
       // start of the race
       lapStart = millis();
       sectorStart = lapStart;
       prevSensor = 1;
       //Serial.print("Lap Start: ");
-      Serial.println(lapStart);
+      //Serial.println(lapStart);
       sectorLocation = 1;
       Serial.println(sectorLocation); 
       raceStarted = true;
@@ -85,14 +85,14 @@ void scanSensor1() {
       lapStart = lapEnd;
       prevSensor = 1;
       //Serial.print("Sector 4: ");
-      Serial.println(sectorTime);
+      //Serial.println(sectorTime);
       //Serial.print("Lap End: ");
-      Serial.println(lapEnd);
+      //Serial.println(lapEnd);
       //Serial.print("Lap Time: ");
-      Serial.println(lapTime);
+      //Serial.println(lapTime);
       //Serial.println();
       //Serial.print("Lap Start: ");
-      Serial.println(lapStart);
+      //Serial.println(lapStart);
       sectorLocation = 1;
       Serial.println(sectorLocation); 
     }
@@ -102,13 +102,13 @@ void scanSensor1() {
 
 void scanSensor2() {
   int dist = scan(trig_PIN2, echo_PIN2);
-  if (dist < 15 && prevSensor == 1) {
+  if (dist < 40 && prevSensor == 1) {
     sectorEnd = millis();
     sectorTime = sectorEnd - sectorStart;
     sectorStart = sectorEnd;
     prevSensor = 2;
     //Serial.print("Sector 1: ");
-    Serial.println(sectorTime);
+    //Serial.println(sectorTime);
     sectorLocation = 2;
     Serial.println(sectorLocation);
   }
@@ -116,13 +116,13 @@ void scanSensor2() {
 
 void scanSensor3() {
   int dist = scan(trig_PIN3, echo_PIN3);
-  if (dist < 15 && prevSensor == 2) {
+  if (dist < 40 && prevSensor == 2) {
     sectorEnd = millis();
     sectorTime = sectorEnd - sectorStart;
     sectorStart = sectorEnd;
     prevSensor = 3;
     //Serial.print("Sector 2: ");
-    Serial.println(sectorTime);
+    //Serial.println(sectorTime);
     sectorLocation = 3;
     Serial.println(sectorLocation);
   }
@@ -130,13 +130,13 @@ void scanSensor3() {
 
 void scanSensor4() {
   int dist = scan(trig_PIN4, echo_PIN4);
-  if (dist < 15 && prevSensor == 3) {
+  if (dist < 40 && prevSensor == 3) {
     sectorEnd = millis();
     sectorTime = sectorEnd - sectorStart;
     sectorStart = sectorEnd;
     prevSensor = 4;
     //Serial.print("Sector 3: ");
-    Serial.println(sectorTime);
+    //Serial.println(sectorTime);
     sectorLocation = 4;
     Serial.println(sectorLocation);
   }
