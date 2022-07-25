@@ -10,7 +10,7 @@ SoftwareSerial btSerial(RX, TX);
 #define IN2 8
 #define ENA 5
 
-#define FRONT 80        // steering to front 
+#define FRONT 75        // steering to front 
 int SHARP_RIGHT= FRONT+30;
 int SHARP_LEFT = FRONT-30;
 int RIGHT= FRONT + 20;
@@ -34,7 +34,7 @@ int sector = 1;
 int prevSector = 0;
 int lapTime = 0;
 
-int carSpeed = 150;
+int carSpeed = 125;
 int turnSpeed = 200;
 int reverseSpeed = 250;
 #define MAX_SPEED 250
@@ -88,14 +88,14 @@ void loop() {
     Serial.println(sector);
   }
   sectortracking();
-  linetracking();
+  //linetracking();
   
 }
 
 void sectortracking() {
   if ((sector == 1 || sector == 3) && (prevSector != 1 && prevSector != 3)) {
     // set preconditions for straight
-    carSpeed = 150;
+    carSpeed = 125;
     turn(FRONT);
     // set adjustment settings for straight
     int slightRight = SLIGHT_RIGHT;
